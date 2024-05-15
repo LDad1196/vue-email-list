@@ -1,26 +1,22 @@
 const { createApp } = Vue
 
 createApp({
-
-    data() {
-        return {
-            numero: null,
-            indirizzo: 'https://flynn.boolean.careers/exercises/api/random/int'
-        }
-    },
-    methods: {
-        getNumero() {
-            axios.get(this.indirizzo).then((result) => { //attenzione all'arrow function!!
-
-                
-
-            });
-        }
-    },
-    mounted() {
-        console.log("App montata");
-
-        this.getNumero();
+  data() {
+    return {
+      arrayMail: [],
     }
-
-}).mount('#app');
+  },
+  methods: {
+    randomMail() {
+      for (let i = 0; i < 10; i++) {
+        axios.get('https://flynn.boolean.careers/exercises/api/random/mail').then((result) => {
+          this.arrayMail.push(result.data.response)
+          console.log(this.arrayMail[i])
+        })
+      }
+    }
+  },
+  mounted() {
+    this.randomMail()
+  }
+}).mount('#app')
